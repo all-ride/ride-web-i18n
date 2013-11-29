@@ -1,0 +1,82 @@
+{
+    "dependencies": [
+        {
+            "interfaces": "pallo\\library\\i18n\\locale\\negotiator\\Negotiator",
+            "class": "pallo\\web\\i18n\\locale\\negotiator\\HttpNegotiator",
+            "id": "http",
+            "calls": [
+                "setLog",
+                {
+                    "method": "setDisabledLocales",
+                    "arguments": [
+                        {
+                            "name": "locales",
+                            "type": "parameter",
+                            "properties": {
+                                "key": "i18n.http.disabled.locales"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "interfaces": "pallo\\library\\i18n\\locale\\negotiator\\Negotiator",
+            "class": "pallo\\web\\i18n\\locale\\negotiator\\PathNegotiator",
+            "id": "path",
+            "calls": ["setLog"]
+        },
+        {
+            "interfaces": "pallo\\library\\i18n\\locale\\negotiator\\Negotiator",
+            "class": "pallo\\web\\i18n\\locale\\negotiator\\RouteNegotiator",
+            "id": "route",
+            "calls": ["setLog"]
+        },
+        {
+            "interfaces": "pallo\\library\\i18n\\locale\\negotiator\\Negotiator",
+            "id": "chain",
+            "extends": "chain",
+            "calls": [
+                {
+                    "method": "addNegotiator",
+                    "arguments": [
+                        {
+                            "name": "negotiator",
+                            "type": "dependency",
+                            "properties": {
+                                "interface": "pallo\\library\\i18n\\locale\\negotiator\\Negotiator",
+                                "id": "http"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "method": "addNegotiator",
+                    "arguments": [
+                        {
+                            "name": "negotiator",
+                            "type": "dependency",
+                            "properties": {
+                                "interface": "pallo\\library\\i18n\\locale\\negotiator\\Negotiator",
+                                "id": "route"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "method": "addNegotiator",
+                    "arguments": [
+                        {
+                            "name": "negotiator",
+                            "type": "dependency",
+                            "properties": {
+                                "interface": "pallo\\library\\i18n\\locale\\negotiator\\Negotiator",
+                                "id": "path"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }        
+    ]
+}

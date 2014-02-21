@@ -1,6 +1,6 @@
 {
-    "name": "pallo/web-i18n",
-    "description": "I18n library integration in the web interface of the Pallo framework",
+    "name": "ride/web-i18n",
+    "description": "I18n library integration in the web interface of the Ride framework",
     "license": "MIT",
     "version": "0.1.1",
     "authors": [
@@ -10,16 +10,16 @@
         }
     ],
     "require": {
-        "pallo/app": ">=0.4.0",
-        "pallo/app-i18n": ">=0.1.1",
-        "pallo/lib-dependency": ">=0.5.0",
-        "pallo/lib-mvc": ">=0.2.0",
-        "pallo/lib-i18n": ">=0.1.0",
-        "pallo/lib-log": ">=0.2.0"
+        "ride/app": ">=0.4.0",
+        "ride/app-i18n": ">=0.1.1",
+        "ride/lib-dependency": ">=0.5.0",
+        "ride/lib-mvc": ">=0.2.0",
+        "ride/lib-i18n": ">=0.1.0",
+        "ride/lib-log": ">=0.2.0"
     }, 
     "autoload": {
         "psr-0": {
-            "pallo\\web\\i18n\\locale\\negotiator": ["src/", "test/src/"]
+            "ride\\web\\i18n\\locale\\negotiator": ["src/", "test/src/"]
         }
     }
 }

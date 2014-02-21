@@ -1,11 +1,11 @@
 <?php
 
-namespace pallo\web\i18n\locale\negotiator;
+namespace ride\web\i18n\locale\negotiator;
 
-use pallo\library\dependency\DependencyInjector;
-use pallo\library\i18n\locale\negotiator\Negotiator;
-use pallo\library\i18n\locale\LocaleManager;
-use pallo\library\log\Log;
+use ride\library\dependency\DependencyInjector;
+use ride\library\i18n\locale\negotiator\Negotiator;
+use ride\library\i18n\locale\LocaleManager;
+use ride\library\log\Log;
 
 /**
  * Negotiator that determines which locale should be used based on the locale
@@ -21,19 +21,19 @@ abstract class AbstractLoggedNegotiator implements Negotiator {
 
     /**
      * Instance of the dependency injector
-     * @var pallo\library\dependency\DependencyInjector
+     * @var ride\library\dependency\DependencyInjector
      */
     protected $dependencyInjector;
 
     /**
      * Instance of the log
-     * @var pallo\library\log\Log
+     * @var ride\library\log\Log
      */
     protected $log;
 
     /**
      * Constructs a new route negotiator
-     * @param pallo\library\dependency\DependencyInjector $dependencyInjector
+     * @param ride\library\dependency\DependencyInjector $dependencyInjector
      * @return null
      */
     public function __construct(DependencyInjector $dependencyInjector) {
@@ -42,7 +42,7 @@ abstract class AbstractLoggedNegotiator implements Negotiator {
 
     /**
      * Sets the instance of the log
-     * @param pallo\library\log\Log $log
+     * @param ride\library\log\Log $log
      * @return null
      */
     public function setLog(Log $log) {
@@ -51,10 +51,10 @@ abstract class AbstractLoggedNegotiator implements Negotiator {
 
     /**
      * Gets the current request
-     * @return pallo\library\mvc\Request
+     * @return ride\library\mvc\Request
      */
     protected function getRequest() {
-        return $this->dependencyInjector->get('pallo\\library\\mvc\\Request');
+        return $this->dependencyInjector->get('ride\\library\\mvc\\Request');
     }
 
 }

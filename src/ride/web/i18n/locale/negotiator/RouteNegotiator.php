@@ -1,8 +1,8 @@
 <?php
 
-namespace pallo\web\i18n\locale\negotiator;
+namespace ride\web\i18n\locale\negotiator;
 
-use pallo\library\i18n\locale\LocaleManager;
+use ride\library\i18n\locale\LocaleManager;
 
 /**
  * Negotiator that determines which locale should be used based on the locale
@@ -12,8 +12,8 @@ class RouteNegotiator extends AbstractLoggedNegotiator {
 
     /**
      * Determines which locale to use, based on the HTTP Accept-Language header.
-     * @param pallo\library\i18n\locale\LocaleManager $manager The locale manager
-     * @return null|pallo\library\i18n\locale\Locale the locale
+     * @param ride\library\i18n\locale\LocaleManager $manager The locale manager
+     * @return null|ride\library\i18n\locale\Locale the locale
      */
     public function getLocale(LocaleManager $manager) {
         $request = $this->getRequest();

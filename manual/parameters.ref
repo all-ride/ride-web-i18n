@@ -1,0 +1,1 @@
+i18n.http.disabled.locales      Comma separated list with codes of locales which will be disabled when detecting the locale with the Accept header of the incoming request.

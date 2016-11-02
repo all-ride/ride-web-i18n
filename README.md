@@ -5,6 +5,7 @@ I18n library integration with the web interface of your Ride application.
 ## Parameters
 
 * __i18n.http.disabled.locales__: Comma separated list with codes of locales which will be disabled when detecting the locale with the Accept header of the incoming request.
+* __i18n.http.disabled.ignore__: Array or string with paths which are ignored for the disabled locales.
 
 ## Related Modules 
 

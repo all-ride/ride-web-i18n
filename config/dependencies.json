@@ -17,6 +17,19 @@
                             }
                         }
                     ]
+                },
+                {
+                    "method": "setIgnorePathsForDisabledLocales",
+                    "arguments": [
+                        {
+                            "name": "paths",
+                            "type": "parameter",
+                            "properties": {
+                                "key": "i18n.http.disabled.ignore",
+                                "default": []
+                            }
+                        }
+                    ]
                 }
             ]
         },
@@ -77,6 +90,6 @@
                     ]
                 }
             ]
-        }        
+        }
     ]
 }

@@ -3,6 +3,8 @@
 namespace ride\web\i18n\locale\negotiator;
 
 use ride\library\i18n\locale\LocaleManager;
+use ride\library\mvc\Request as MvcRequest;
+use ride\library\StringHelper;
 
 /**
  * Negotiator that determines which locale should be used based on the HTTP Accept-Language
@@ -24,6 +26,12 @@ class HttpNegotiator extends AbstractLoggedNegotiator {
      * @var array
      */
     private $disabledLocales;
+
+    /**
+     * Array with the paths to ignore the disabled locales for
+     * @var array
+     */
+    private $ignoreDisabledLocales = [];
 
     /**
      * Disable a locale for this negotiator
@@ -48,6 +56,24 @@ class HttpNegotiator extends AbstractLoggedNegotiator {
     }
 
     /**
+     * Sets paths to ignore the disabled locales for
+     * @param string|array $paths All requested paths starting with a path in
+     * this array will not use the disabled locales
+     * @return null
+     */
+    public function setIgnorePathsForDisabledLocales($paths) {
+        $this->ignoreDisabledLocales = array();
+
+        if (!is_array($paths)) {
+            $paths = array($paths);
+        }
+
+        foreach ($paths as $path) {
+            $this->ignoreDisabledLocales[$path] = true;
+        }
+    }
+
+    /**
      * Determines which locale to use, based on the HTTP Accept-Language header.
      * @param \ride\library\i18n\locale\LocaleManager $manager The locale manager
      * @return null| \ride\library\i18n\locale\Locale the locale
@@ -60,6 +86,12 @@ class HttpNegotiator extends AbstractLoggedNegotiator {
             }
 
             return null;
+        }
+
+        if ($request instanceof MvcRequest) {
+            $path = $request->getBasePath();
+        } else {
+            $path = $request->getPath();
         }
 
         $fallbackLanguages = array();
@@ -76,7 +108,15 @@ class HttpNegotiator extends AbstractLoggedNegotiator {
                 $fallbackLanguages[$language] = true;
             }
 
-            if (!isset($this->disabledLocales[$locale]) && $manager->hasLocale($locale)) {
+            if (isset($this->disabledLocales[$locale]) && (!$this->ignoreDisabledLocales || ($this->ignoreDisabledLocales && !StringHelper::startsWith($path, array_keys($this->ignoreDisabledLocales))))) {
+                if ($this->log) {
+                    $this->log->logDebug('Could not use locale from Accept-Language header', $locale . ' is disabled', self::LOG_SOURCE);
+                }
+
+                continue;
+            }
+
+            if ($manager->hasLocale($locale)) {
                 if ($this->log) {
                     $this->log->logDebug('Loaded locale from Accept-Language header', $locale, self::LOG_SOURCE);
                 }

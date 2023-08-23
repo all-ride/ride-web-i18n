@@ -48,6 +48,9 @@ class HttpNegotiator extends AbstractLoggedNegotiator {
         }
 
         foreach ($locales as $locale) {
+            if (is_null($locale)) {
+                continue;
+            }
             $localeLocales = explode(',', $locale);
             foreach ($localeLocales as $locale) {
                 $this->disabledLocales[trim($locale)] = true;
